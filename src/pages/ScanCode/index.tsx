@@ -12,9 +12,9 @@ const ScanCode = () => {
     if (code.length > 12) {
       const sendRequest = async () => {
         const res = await SendBarcode(code.slice(1));
-        console.log(res.sConfirmationText);
-        if (res.sConfirmationText) {
-          setResult(res.sConfirmationText.slice(1, 5));
+        console.log(res.message.sConfirmationText);
+        if (res.message.sConfirmationText) {
+          setResult(res.message.sConfirmationText.slice(1, 5));
         } else {
           setCode('');
         }
