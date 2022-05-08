@@ -1,4 +1,4 @@
-import { Center, Image } from '@mantine/core';
+import { Button, Center, Image } from '@mantine/core';
 import BarCodeScanner from 'barcode-react-scanner';
 import React, { useEffect, useState } from 'react';
 
@@ -34,7 +34,12 @@ const ScanCode = () => {
       style={{ width: '100vw', height: '100vh' }}
     >
       <Image src={VarCodeLogoSrc} sx={{ width: '90%' }} />
-      {code && <h2> {result} </h2>}
+      {code && (
+        <>
+          <h2>{result}</h2>
+          <Button onClick={() => setCode('')}> Scan Again </Button>
+        </>
+      )}
       {!code && (
         <BarCodeScanner
           onUpdate={(err, resp): void => {
