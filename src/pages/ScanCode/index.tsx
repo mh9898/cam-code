@@ -6,19 +6,22 @@ import VarCodeLogoSrc from '@/assets/varcode-logo.png';
 import { SendBarcode } from '@/services/barcode.service';
 
 const ScanCode = () => {
-  // const handleChange = (e) => {
-  //     const [f] = e.target.files;
-  //     console.log(URL.createObjectURL(f))
-  //     QuaggaDecode(URL.createObjectURL(f), setFile)
-  // };
   const [code, setCode] = useState<string>('');
+  const [result, setResult] = useState<string>('');
   useEffect(() => {
     if (code.length > 12) {
       const sendRequest = async () => {
-        const res = await SendBarcode(code);
+        const res = await SendBarcode(code.slice(1));
+        if (res.sConfirmationText) {
+          setResult(res.sConfirmationText.slice(1, 5));
+        } else {
+          setCode('');
+        }
         console.log(res);
       };
       sendRequest();
+    } else {
+      setCode('');
     }
   }, [code]);
   return (
@@ -30,7 +33,7 @@ const ScanCode = () => {
       style={{ width: '100vw', height: '100vh' }}
     >
       <Image src={VarCodeLogoSrc} sx={{ width: '90%' }} />
-      {code && <h2> {code} </h2>}
+      {code && <h2> {result} </h2>}
       {!code && (
         <BarCodeScanner
           onUpdate={(err, resp): void => {
@@ -45,3 +48,8 @@ const ScanCode = () => {
 };
 
 export default ScanCode;
+// const handleChange = (e) => {
+//     const [f] = e.target.files;
+//     console.log(URL.createObjectURL(f))
+//     QuaggaDecode(URL.createObjectURL(f), setFile)
+// };

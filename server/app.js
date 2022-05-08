@@ -57,7 +57,7 @@ app.use(express.static(path.resolve(__dirname, '../dist')))
 app.post("/api/barcode", async(req, res) => {
     const test = await SendBarcode(req.body.barcode)
     console.log(test)
-    res.json({ message: JSON.parse(test) });
+    res.json({ message: JSON.parse(test.d) });
 });
 
 // All other GET requests not handled before will return our React app

@@ -1,23 +1,18 @@
-import { useState } from 'react';
-import ScanCode from "@/pages/ScanCode";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0);
+import ScanCode from '@/pages/ScanCode';
 
+function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          {/*<Route*/}
-          {/*    path="/"*/}
-          {/*    element={<Home />}*/}
-          {/*/>*/}
-          <Route
-              path="/"
-              element={<ScanCode />}
-          />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        {/*<Route*/}
+        {/*    path="/"*/}
+        {/*    element={<Home />}*/}
+        {/*/>*/}
+        <Route path="/" element={<ScanCode />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
