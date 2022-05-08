@@ -14,7 +14,7 @@ const ScanCode = () => {
         const res = await SendBarcode(code.slice(1));
         console.log(res.message.sConfirmationText);
         if (res.message.sConfirmationText) {
-          setResult(res.message.sConfirmationText.slice(1, 5));
+          setResult(res.message.sConfirmationText.slice(5));
         } else {
           setCode('');
         }
