@@ -18,7 +18,7 @@ const varCodeDev = axios.create({
         // "Content-Length": 10000,
     },
 });
-export const SendBarcode = async (barcode) => {
+export const SendBarcode = async (barcode, lat, long) => {
     try {
         const {data} = await varCodeDev.post('/SetBarcodeJson', {
             bDeliveryNoteFlag: true,
@@ -35,8 +35,8 @@ export const SendBarcode = async (barcode) => {
             sdeviceType: '',
             sBarcode: barcode, //required
             sUpc: 'upc',
-            dLatitud: 0.0,
-            dLongitud: 0.0,
+            dLatitud: lat,
+            dLongitud: long,
             Img: '',
             Img2: '',
             Img3: '',
@@ -55,7 +55,7 @@ app.use(express.static(path.resolve(__dirname, '../dist')))
 
 // Handle GET requests to /api route
 app.post("/api/barcode", async(req, res) => {
-    const test = await SendBarcode(req.body.barcode)
+    const test = await SendBarcode(req.body.barcode, req.body.lat, req.body.long);
     console.log(test)
     res.json({ message: JSON.parse(test.d) });
 });

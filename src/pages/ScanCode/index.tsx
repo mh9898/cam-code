@@ -7,11 +7,37 @@ import { SendBarcode } from '@/services/barcode.service';
 
 const ScanCode = () => {
   const [code, setCode] = useState<string>('');
+  let long = '';
+  let lat = '';
+  useEffect(() => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function success(pos: { coords: any; }) {
+      const crd = pos.coords;
+      console.log(`Latitude : ${crd.latitude}`);
+      lat = crd.latitude;
+      long = crd.longitude;
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err: { code: any; message: any; }) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
+
+
   const [result, setResult] = useState<string>('');
   useEffect(() => {
     if (code.length > 12) {
       const sendRequest = async () => {
-        const res = await SendBarcode(code.slice(1));
+        const res = await SendBarcode(code.slice(1), lat, long);
         console.log(res.message.sConfirmationText);
         if (res.message.sConfirmationText) {
           setResult(res.message.sConfirmationText.slice(5));
