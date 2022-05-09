@@ -1,15 +1,16 @@
 import axios from "axios";
 import express from 'express';
+import cors from 'cors';
 
 
 const app = express()
+app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 const varCodeDev = axios.create({
     baseURL: 'http://deltadev.mymdfile.com/ws/Service.asmx',
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        // "Content-Type": "text/xml; charset=utf-8",
-        // "Content-Length": 10000,
     },
 });
 export const SendBarcode = async (barcode) => {
@@ -52,7 +53,9 @@ app.post("/api/barcode", async(req, res) => {
     res.json({ message: JSON.parse(test.d) });
 });
 
-
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+})
 const PORT = process.env.PORT || 3443;
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

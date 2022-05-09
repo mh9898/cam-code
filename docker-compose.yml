@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  camcode-proxy:
+    build:
+      context: ./server
+    ports:
+      - "3444:3443"
+
+  camcode-client:
+    build:
+      context: ./camcode-client
+    ports:
+      - '3000:3000'
+
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "8082:80"
