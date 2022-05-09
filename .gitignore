@@ -6,7 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+camcode-client/dist
+camcode-client/.idea
+server/node_modules
+camcode-client/node_modules
 node_modules
 dist-ssr
 *.local

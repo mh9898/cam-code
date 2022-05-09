@@ -1,15 +1,9 @@
 import axios from "axios";
-
 import express from 'express';
-// const https = require('https')
-import path from 'path';
-import {fileURLToPath} from 'url';
-// const fs = require('fs')
+
 
 const app = express()
 app.use(express.json())
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const varCodeDev = axios.create({
     baseURL: 'http://deltadev.mymdfile.com/ws/Service.asmx',
     headers: {
@@ -50,8 +44,6 @@ export const SendBarcode = async (barcode) => {
     }
 
 };
-// Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../dist')))
 
 // Handle GET requests to /api route
 app.post("/api/barcode", async(req, res) => {
@@ -60,10 +52,7 @@ app.post("/api/barcode", async(req, res) => {
     res.json({ message: JSON.parse(test.d) });
 });
 
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-});
+
 const PORT = process.env.PORT || 3443;
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
