@@ -11,7 +11,7 @@ app.use(express.json())
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const varCodeDev = axios.create({
-    baseURL: 'http://deltadev.mymdfile.com/ws/Service.asmx',
+    baseURL: 'http://varcodeglobal.mymdfile.com/ws/Service.asmx',
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
         // "Content-Type": "text/xml; charset=utf-8",
