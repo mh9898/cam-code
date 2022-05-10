@@ -7,7 +7,7 @@ import { SendBarcode } from '@/services/barcode.service';
 import {getHexColor} from "@/pages/ScanCode/ScanCode.logic";
 
 const ScanCode = () => {
-  const [result, setResult] = useState<string>('The Tenmost Popular Books');
+  const [result, setResult] = useState<string>('');
   const [code, setCode] = useState<string>('');
   const [color, setColor] = useState<string>('#fff');
   let long = '';
