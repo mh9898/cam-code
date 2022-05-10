@@ -35,8 +35,8 @@ export const SendBarcode = async (barcode, lat, long) => {
             sdeviceType: '',
             sBarcode: barcode, //required
             sUpc: 'upc',
-            dLatitud: parseInt(lat) || 0.0,
-            dLongitud: parseInt(long) || 0.0,
+            dLatitud: parseFloat(lat).toFixed(7) || 0.0,
+            dLongitud: parseFloat(long).toFixed(7) || 0.0,
             Img: '',
             Img2: '',
             Img3: '',
