@@ -43,7 +43,7 @@ const ScanCode = () => {
         console.log(res.message.sConfirmationText);
         if (res.message.sConfirmationText) {
           setResult(res.message.sConfirmationText.slice(5));
-          setColor(getHexColor(res.message.nBColor))
+          setColor(getHexColor(res.message.nAbsColor))
         } else {
           setCode('');
         }
