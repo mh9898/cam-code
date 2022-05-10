@@ -43,6 +43,7 @@ const ScanCode = () => {
         console.log(res.message.sConfirmationText);
         if (res.message.sConfirmationText) {
           setResult(res.message.sConfirmationText.slice(5));
+          console.log(getHexColor(res.message.nAbsColor))
           setColor(getHexColor(res.message.nAbsColor))
         } else {
           setCode('');
@@ -66,7 +67,7 @@ const ScanCode = () => {
       <Image src={VarCodeLogoSrc} sx={{ width: '90%' }} />
       {code && (
         <>
-          {result ?   <Paper p="2rem" color={color}>
+          {result ?   <Paper my="1rem" p="2rem" color={color}>
             <h2>{result}</h2>
           </Paper> : <h2>Scanning...</h2>}
           <Button onClick={() => setCode('')}> Scan Again </Button>
