@@ -67,7 +67,7 @@ const ScanCode = () => {
       <Image src={VarCodeLogoSrc} sx={{ width: '90%' }} />
       {code && (
         <>
-          {result ?   <Paper my="1rem" p="2rem" color={color}>
+          {result ?   <Paper my="1rem" p="2rem" sx={{background: color}}>
             <h2>{result}</h2>
           </Paper> : <h2>Scanning...</h2>}
           <Button onClick={() => setCode('')}> Scan Again </Button>
