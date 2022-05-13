@@ -57,7 +57,7 @@ app.post("/api/barcode", async(req, res) => {
 app.get("/api", (req, res) => {
     res.send("Hello 2Wsssssorled!!");
 })
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT} - but on 443 in docker compose`);
 });
