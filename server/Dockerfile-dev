@@ -1,6 +1,10 @@
 FROM node:alpine
-COPY . /app
+
 WORKDIR /app
+COPY package.json ./
 RUN npm install
-EXPOSE 3443
+COPY . .
+
+EXPOSE 8080
+
 CMD ["npm", "start"]

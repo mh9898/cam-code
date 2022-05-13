@@ -5,6 +5,7 @@ import cors from 'cors';
 
 const app = express()
 app.use(cors())
+app.set('base', '/api');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 const varCodeDev = axios.create({
@@ -53,12 +54,12 @@ app.post("/api/barcode", async(req, res) => {
     res.json({ message: JSON.parse(test.d) });
 });
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
+app.get("/api", (req, res) => {
+    res.send("Hello 2Wsssssorled!!");
 })
-const PORT = process.env.PORT || 3443;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on ${PORT} - but on 443 in docker compose`);
 });
 
 // const sslServer = https.createServer(
