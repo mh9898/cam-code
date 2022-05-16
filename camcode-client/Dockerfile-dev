@@ -1,7 +1,7 @@
 FROM node:slim
 WORKDIR /app
-COPY package.json .
-RUN npm install
+COPY package*.json .
+RUN npm ci
 ADD . .
 EXPOSE 3000
 ENTRYPOINT ["/bin/bash", "-c", "npm rebuild esbuild && npm start"]
