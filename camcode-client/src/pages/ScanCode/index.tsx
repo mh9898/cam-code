@@ -10,14 +10,14 @@ const ScanCode = () => {
   const [result, setResult] = useState<string>('');
   const [latLong, setLatLong] = useState<any>({longitude: 0, latitude: 0});
   useEffect(()=>{
-    function success(position: { coords: { latitude: any; longitude: any; }; }) {
-      const { latitude, longitude } = position.coords;
-      setLatLong({latitude, longitude});
-    }
     function error(err: any) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
-    navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true,
+    navigator.geolocation.getCurrentPosition((position) =>{
+      const { latitude, longitude } = position.coords;
+      console.log(latitude, longitude);
+      setLatLong({latitude, longitude});
+    } , error, {enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0});
   }, [])
