@@ -31,8 +31,8 @@ export const SendBarcode = async (barcode, lat, long) => {
             sdeviceType: '',
             sBarcode: barcode, //required
             sUpc: 'upc',
-            dLatitud: lat,
-            dLongitud: long,
+            dLatitud: Number(lat),
+            dLongitud: Number(long),
             Img: '',
             Img2: '',
             Img3: '',
@@ -51,7 +51,7 @@ export const SendBarcode = async (barcode, lat, long) => {
 app.post("/api/barcode", async(req, res) => {
     const test = await SendBarcode(req.body.barcode, req.body.lat, req.body.long);
     console.log(test)
-    res.json({ message: JSON.parse(test.d) });
+    res.json({ message: JSON.parse(test.d), lat: Number(req.body.lat), long: Number(req.body.long) });
 });
 
 app.get("/api", (req, res) => {

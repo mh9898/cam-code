@@ -1,13 +1,20 @@
-import { Button, Center, Image } from '@mantine/core';
+import {Button, Center, Image, Paper} from '@mantine/core';
 import BarCodeScanner from 'barcode-react-scanner';
 import React, { useEffect, useState } from 'react';
 
 import VarCodeLogoSrc from '@/assets/varcode-logo.png';
 import { SendBarcode } from '@/services/barcode.service';
 
+export const getHexColor = (number: string) => {
+  const strToNum = Number(number);
+  if(!strToNum) return '#989a81';
+  return "#" + ("000000" + (strToNum >>> 0).toString(16)).slice(-6);
+};
+
 const ScanCode = () => {
   const [code, setCode] = useState<string>('');
   const [result, setResult] = useState<string>('');
+  const [color, setColor] = useState<string>('#fff');
   const [latLong, setLatLong] = useState<any>({longitude: 0, latitude: 0});
   useEffect(()=>{
     function error(err: any) {
@@ -27,6 +34,7 @@ const ScanCode = () => {
         const res = await SendBarcode(code.slice(1), latLong.longitude, latLong.latitude);
         console.log(res.message.sConfirmationText);
         if (res.message.sConfirmationText) {
+          setColor(getHexColor(res.message.nBColor))
           setResult(res.message.sConfirmationText.slice(5));
         } else {
           setCode('');
@@ -49,7 +57,7 @@ const ScanCode = () => {
       <Image src={VarCodeLogoSrc} sx={{ width: '90%' }} />
       {code && (
         <>
-          {result ? <h2>{result}</h2> : <h2>Scanning...</h2>}
+          {result ? <Paper sx={{background: color}} p="2rem"><h2>{result}</h2></Paper> : <h2>Scanning...</h2>}
           <Button onClick={() => setCode('')}> Scan Again </Button>
         </>
       )}
