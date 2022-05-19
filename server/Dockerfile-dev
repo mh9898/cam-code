@@ -7,4 +7,6 @@ COPY . .
 
 EXPOSE 8081
 
+RUN apk add --update vim
+
 CMD ["npm", "start"]

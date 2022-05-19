@@ -59,14 +59,14 @@ app.post("/api/barcode", async (req, res) => {
     return;
   }
   res.json({
-    message: JSON.parse(apiBarCodeResponse.d),
+    message: result,
     lat: Number(req.body.lat),
     long: Number(req.body.long),
   });
 });
 
 app.get("/api", (req, res) => {
-  res.send("Hello 2Wsssssorled!!");
+  res.send("healthy");
 });
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
