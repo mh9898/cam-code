@@ -53,6 +53,7 @@ app.post("/api/barcode", async (req, res) => {
     req.body.long
   );
   const result = JSON.parse(apiBarCodeResponse.d);
+  console.log(result);
   if (result.scid == 0) {
     res.status(500).send({ message: "barcode scan error" });
     return;
