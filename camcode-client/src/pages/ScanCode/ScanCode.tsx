@@ -9,6 +9,7 @@ import Layout from '@/layout/Layout';
 import { RichTextEditor } from '@mantine/rte';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import { useMutation } from 'react-query';
+import ErrorOnScan from '@/pages/ErrorOnScan/ErrorOnScan';
 
 export const getHexColor = (number: string) => {
   const strToNum = Number(number);
@@ -23,25 +24,27 @@ const ScanCode = () => {
   const [value, onChange] = useState(customStyle.scanBarcodeInfoText);
   const navigate = useNavigate();
 
-  const handleSendBarcode = useMutation(sendBarcode);
+  const handleSendBarcode = useMutation(sendBarcode, {
+    onError: () => navigate('/ErrorOnScan'),
+    onSuccess: (res) =>
+      navigate('/ReviewScan', {
+        state: {
+          cardBg: getHexColor(res.message.nBColor),
+          result: res.message.sConfirmationText.slice(5),
+        },
+      }),
+  });
 
   useEffect(() => {
     const sendRequest = async () => {
       if (code.length > 12) {
         console.log(code);
-        const res = await handleSendBarcode.mutateAsync({
+        handleSendBarcode.mutate({
           barcode: code.slice(1),
           //@ts-ignore
           long: state?.longitude || 0,
           //@ts-ignore
           lat: state?.latitude || 0,
-        });
-
-        navigate('/ReviewScan', {
-          state: {
-            cardBg: getHexColor(res.message.nBColor),
-            result: res.message.sConfirmationText.slice(5),
-          },
         });
       }
     };
