@@ -1,27 +1,33 @@
-import varCodeDev from './axios.config.js';
+import { varCodeDev } from "./axios.config.js";
 
-export const SendBarcode = async (barcode) => {
-  const { data } = await varCodeDev.post('/SetBarcodeJson', {
-    bDeliveryNoteFlag: true,
-    sDeliveryNote: 'note',
-    sUserName: 'name',
-    sUserCompany: 'company',
-    sUserAddress: '',
-    sUserCountry: 'Country',
-    sUserState: 'State',
-    sUserPhone: '3334444', //requiredrequired
-    sUserEmail: '',
-    sswVersion: '',
-    sdeviceType: '',
-    sBarcode: barcode, //required
-    sUpc: 'upc',
-    dLatitud: 0.0,
-    dLongitud: 0.0,
-    Img: '',
-    Img2: '',
-    Img3: '',
-    langCode: '',
-    offlineTime: '',
-  });
-  return data;
+export const SendBarcode = async (barcode, lat, long) => {
+  try {
+    const { data } = await varCodeDev.post("/SetBarcodeJson", {
+      bDeliveryNoteFlag: true,
+      sDeliveryNote: "note-camcode-client",
+      sUserName: "name-camcode-client",
+      sUserCompany: "company-camcode-client",
+      sUserAddress: "add-camcode-client",
+      sUserCountry: "Country-camcode-client",
+      sUserState: "State-camcode-client",
+      sUserPhone: "3334444-camcode-client",
+      sUserZip: "",
+      sUserEmail: "email@-camcode-client",
+      sswVersion: "",
+      sdeviceType: "",
+      sBarcode: barcode, //required
+      sUpc: "upc",
+      dLatitud: Number(lat),
+      dLongitud: Number(long),
+      Img: "",
+      Img2: "",
+      Img3: "",
+      langCode: "",
+      offlineTime: "",
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };

@@ -7,7 +7,7 @@ const ErrorOnScan = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <Center>
+      <Center sx={{ flexDirection: 'column' }}>
         <Title>Seems Like We Couldn't Scan This Barcode</Title>
         <Button onClick={() => navigate(-1)}>Try Again</Button>
       </Center>

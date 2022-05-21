@@ -8,7 +8,7 @@ type Props = {
 };
 const AppProviders = ({ children }: Props) => {
   const [customStyle, setCustomStyle] = useState({
-    headerBG: '#d7d7d7',
+    notchBG: '#d7d7d7',
     headerIconIMG: VarCodeLogo,
     headerIconURL: 'https://www.google.com',
     contentBG: '#e8e8e8',
@@ -18,7 +18,7 @@ const AppProviders = ({ children }: Props) => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={{ fontFamily: 'Poppins', headings: { fontFamily: 'Poppins' } }}>
+      <MantineProvider theme={{ fontFamily: 'Montserrat', headings: { fontFamily: 'Montserrat' } }}>
         <CustomThemeContext.Provider value={{ customStyle, setCustomStyle }}>
           {children}
         </CustomThemeContext.Provider>

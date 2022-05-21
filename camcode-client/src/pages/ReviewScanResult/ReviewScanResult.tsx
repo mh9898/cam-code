@@ -15,11 +15,11 @@ const ReviewScanResult = () => {
         <Card my="2rem" p="2rem" sx={{ background: state?.cardBg }}>
           <Text size="lg">{state?.result}</Text>
         </Card>
-        <Card my="1rem" p="1rem">
-          <Text>{state?.result}</Text>
+        <Card my="1rem" p="1rem" onClick={() => navigate('/Feedback')}>
+          <Text>Send Us Feedback</Text>
         </Card>
-        <Card my="1rem" p="1rem">
-          <Text>{state?.result}</Text>
+        <Card my="1rem" p="1rem" onClick={() => navigate('/ContactUs')}>
+          <Text>Contact us</Text>
         </Card>
         <Card my="1rem" p="1rem">
           <Text>{state?.result}</Text>
