@@ -18,7 +18,7 @@ services:
       context: ./camcode-client
       dockerfile: ./Dockerfile-prod
     ports:
-      - '443:443'
+      - '4431:443'
   nginx:
     restart: always
     build:
