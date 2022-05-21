@@ -10,10 +10,10 @@ export const layoutStyle = createStyles((theme) => ({
 export const previewPhoneLayoutStyle = createStyles((theme) => ({
   root: {
     display: 'flex',
-    height: '100%',
     flexDirection: 'column',
-    paddingInline: '2rem',
-    paddingBlock: '8rem',
+    paddingInline: 'auto',
+    paddingBlock: '2rem',
     borderRadius: '16px',
+    height: '770px',
   },
 }));

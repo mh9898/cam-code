@@ -1,12 +1,14 @@
 import React from 'react';
 import Layout from '@/layout/Layout';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
-import { Button, Center, Text, Textarea } from '@mantine/core';
+import { Center, Text, Textarea } from '@mantine/core';
+import Button from '@/lib/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Feedback = () => {
   const [images, setImages] = React.useState([]);
   const maxNumber = 3;
-
+  const navigate = useNavigate();
   const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
@@ -15,8 +17,10 @@ const Feedback = () => {
   return (
     <Layout>
       <Center sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-        <Text>feedback</Text>
-        <Textarea rows={5} sx={{ width: '100%' }} my="2rem" />
+        <Button onClick={() => navigate(-1)} mt="1rem">
+          Back
+        </Button>
+        <Textarea rows={5} sx={{ width: '100%' }} my="2rem" placeholder="write some feedback" />
         <ImageUploading multiple value={images} onChange={onChange} maxNumber={maxNumber}>
           {({
             imageList,

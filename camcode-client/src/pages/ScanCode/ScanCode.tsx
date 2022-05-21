@@ -1,4 +1,4 @@
-import { Button, Center, Image, Paper, Title } from '@mantine/core';
+import { Button, Center, Image, Paper, Text, Title } from '@mantine/core';
 import BarCodeScanner from 'barcode-react-scanner';
 import React, { useEffect, useState } from 'react';
 
@@ -18,11 +18,12 @@ export const getHexColor = (number: string) => {
 };
 
 const ScanCode = () => {
-  const customStyle = useCustomTheme();
+  const { customStyle } = useCustomTheme();
   const { state } = useLocation();
   const [code, setCode] = useState<string>('');
   const [value, onChange] = useState(customStyle.scanBarcodeInfoText);
   const navigate = useNavigate();
+  console.log(customStyle);
 
   const handleSendBarcode = useMutation(sendBarcode, {
     onError: () => navigate('/ErrorOnScan'),
@@ -60,18 +61,6 @@ const ScanCode = () => {
   };
   return (
     <Layout>
-      {/*{code && (*/}
-      {/*  <>*/}
-      {/*    {result ? (*/}
-      {/*      <Paper sx={{ background: color }} p="2rem">*/}
-      {/*        <h2>{result}</h2>*/}
-      {/*      </Paper>*/}
-      {/*    ) : (*/}
-      {/*      <h2>Scanning...</h2>*/}
-      {/*    )}*/}
-      {/*    <Button onClick={() => setCode('')}> Scan Again </Button>*/}
-      {/*  </>*/}
-      {/*)}*/}
       <Center sx={{ flexDirection: 'column' }}>
         <RichTextEditor
           value={value}
@@ -83,6 +72,7 @@ const ScanCode = () => {
         />
         {!code && (
           <div style={{ width: '90vw' }}>
+            <Text>try changing the barcode's distance from the camera</Text>
             <BarCodeScanner
               onUpdate={(err, resp): void => {
                 if (resp) {

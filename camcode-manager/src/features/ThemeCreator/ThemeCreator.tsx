@@ -1,17 +1,42 @@
 import React, { useState } from 'react';
-import { Center, ColorInput, ColorPicker } from '@mantine/core';
+import { Button, Center, ColorInput, ColorPicker } from '@mantine/core';
 import CustomizeCard from '@/features/ThemeCreator/components/CustomizeCard/CustomizeCard';
 import WelcomeTextRte from '@/features/ThemeCreator/components/WelcomeTextRTE/WelcomeTextRTE';
 import UploadLogo from '@/features/ThemeCreator/components/UploadLogo/UploadLogo';
 import ContactDetails from '@/features/ThemeCreator/components/ContactDetails/ContactDetails';
 import useCustomTheme from '@/hooks/useCustomTheme';
-import { ICustomStyle } from '@/types/customStyle.type';
+import { ICustomStyle, ICustomThemeMetadata } from '@/types/customStyle.type';
+import { createThemeService } from '@/services/customTheme.service';
+import { showNotification } from '@mantine/notifications';
 
 const ThemeCreator = () => {
   const [currentTheme, setCurrentTheme] = useCustomTheme();
-
+  const [contactDetails, setContactDetails] = useState<ICustomThemeMetadata | null>(null);
+  const createTheme = async () => {
+    if (currentTheme.headerIconIMG.length < 100) {
+      alert('Please upload a logo');
+      return;
+    }
+    if (!contactDetails?.websiteLink) return;
+    try {
+      const result = await createThemeService({ ...currentTheme, ...contactDetails });
+      console.log(result);
+      showNotification({
+        title: 'Success',
+        message: 'Theme created!',
+        color: 'green',
+      });
+    } catch (e) {
+      console.log(e);
+      showNotification({
+        title: 'Error',
+        message: 'Something went wrong',
+        color: 'red',
+      });
+    }
+  };
   return (
-    <Center sx={{ width: '100%' }}>
+    <Center sx={{ width: '100%', flexDirection: 'column' }}>
       <div
         style={{
           display: 'grid',
@@ -62,9 +87,12 @@ const ThemeCreator = () => {
           <WelcomeTextRte />
         </CustomizeCard>
         <CustomizeCard title={'Contact Details'}>
-          <ContactDetails />
+          <ContactDetails setContactDetails={setContactDetails} />
         </CustomizeCard>
       </div>
+      <Button mt="2rem" color="green" variant="outline" radius="xl" onClick={createTheme}>
+        Save
+      </Button>
     </Center>
   );
 };

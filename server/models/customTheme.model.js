@@ -25,6 +25,22 @@ const commentsSchema = new Schema({
     type: String,
     required: true,
   },
+  themeName: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  websiteLink: {
+    type: String,
+    required: true,
+  },
 });
 
 export default model("Custom-Themes", commentsSchema);

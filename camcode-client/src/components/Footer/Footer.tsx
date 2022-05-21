@@ -3,7 +3,7 @@ import { Footer as FooterM, Image } from '@mantine/core';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import VarCodeLogo from '@/assets/varcode-logo.png';
 const Footer = () => {
-  const customStyle = useCustomTheme();
+  const { customStyle } = useCustomTheme();
   return (
     <FooterM
       height="10vh"

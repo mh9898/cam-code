@@ -16,16 +16,16 @@ const ReviewScanResult = () => {
             <Title order={3}>{state?.result}</Title>
           </Center>
         </Card>
-        <Button mb="1rem" sx={{ width: '50%' }} onClick={() => navigate('/Feedback')}>
+        <Button mb="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/Feedback')}>
           FeedBack
         </Button>
-        <Button my="1rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>
+        <Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>
           Contact Us
         </Button>
-        <Button my="1rem" sx={{ width: '50%' }} onClick={() => navigate('/ErrorOnScan')}>
+        <Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ErrorOnScan')}>
           Survey Link
         </Button>
-        <Button mt="1rem" sx={{ width: '50%' }} onClick={() => navigate(-1)}>
+        <Button mt="4rem" sx={{ width: '50%' }} color="red" onClick={() => navigate(-1)}>
           Scan Again
         </Button>
       </Center>

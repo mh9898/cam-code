@@ -30,8 +30,10 @@ code {
 }
 
 .dbrScanner-video{
-  width: 100%;
+  width: 90vw;
   height: 30vh;
+  border-radius: 20px;
+  object-fit: fill;
 }
 #scanner-container{
   width: 100%;

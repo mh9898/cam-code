@@ -4,7 +4,7 @@ import { Anchor, Center, Container, Image, Text } from '@mantine/core';
 import useCustomTheme from '@/hooks/useCustomTheme';
 
 const Header = () => {
-  const customStyle = useCustomTheme();
+  const { customStyle } = useCustomTheme();
   const { classes } = headerStyle(customStyle.notchBG)();
   return (
     <header>

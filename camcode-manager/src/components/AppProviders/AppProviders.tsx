@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import VarCodeLogo from '@/assets/varcode-logo.png';
 import { CustomThemeContext } from '@/context/ThemeContext';
 import { ICustomStyle } from '@/types/customStyle.type';
+import { NotificationsProvider } from '@mantine/notifications';
 type Props = {
   children: React.ReactNode;
 };
@@ -21,11 +22,15 @@ const AppProviders = ({ children }: Props) => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={{ fontFamily: 'Montserrat', headings: { fontFamily: 'Montserrat' } }}>
-        <CustomThemeContext.Provider value={{ customStyle, setCustomStyle }}>
-          {children}
-        </CustomThemeContext.Provider>
-      </MantineProvider>
+      <NotificationsProvider>
+        <MantineProvider
+          theme={{ fontFamily: 'Montserrat', headings: { fontFamily: 'Montserrat' } }}
+        >
+          <CustomThemeContext.Provider value={{ customStyle, setCustomStyle }}>
+            {children}
+          </CustomThemeContext.Provider>
+        </MantineProvider>
+      </NotificationsProvider>
     </QueryClientProvider>
   );
 };

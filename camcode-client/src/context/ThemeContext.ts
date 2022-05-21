@@ -1,3 +1,6 @@
-import {createContext} from "react";
+import { createContext } from 'react';
 
-export const CustomThemeContext = createContext<{customStyle: any} | {customStyle: any, setCustomStyle: any} >({customStyle: {}})
+export const CustomThemeContext = createContext<{ customStyle: any; setCustomStyle: any }>({
+  customStyle: {},
+  setCustomStyle: () => {},
+});

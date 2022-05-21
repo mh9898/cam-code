@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Box, Group } from '@mantine/core';
+import { TextInput, Button } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import { ICustomThemeMetadata } from '@/types/customStyle.type';
 
 const phoneRegex =
   /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
@@ -12,18 +14,28 @@ const schema = z.object({
   phone: z.string().min(3, { message: 'Phone number must be at least 3 numbers' }),
 });
 
-const ContactDetails = () => {
+const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
+      themeName: 'varcode-test',
       websiteLink: '',
       email: '',
-      phone: 18,
+      phone: '',
     },
   });
   return (
     <>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form
+        onSubmit={form.onSubmit((values: ICustomThemeMetadata) => {
+          setContactDetails(values);
+          console.log(values);
+          showNotification({
+            title: 'Details Verified',
+            message: 'You can now submit your theme',
+          });
+        })}
+      >
         <TextInput
           required
           label="Email"
@@ -40,7 +52,7 @@ const ContactDetails = () => {
         <TextInput
           required
           label="Phone"
-          placeholder="Valid Phone"
+          placeholder="Company phone number"
           mt="sm"
           {...form.getInputProps('phone')}
         />
