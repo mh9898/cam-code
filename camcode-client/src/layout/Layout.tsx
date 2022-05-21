@@ -9,11 +9,11 @@ type Props = {
 };
 const Layout = ({ children }: Props) => {
   const { classes } = layoutStyle();
-  const style = useCustomTheme();
+  const { customStyle } = useCustomTheme();
   return (
     <Container classNames={classes} fluid>
       <Header />
-      <div style={{ flex: '1', background: style.contentBG, paddingInline: '1rem' }}>
+      <div style={{ flex: '1', background: customStyle.contentBG, paddingInline: '1rem' }}>
         {children}
       </div>
       <Footer />
