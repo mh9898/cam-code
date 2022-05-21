@@ -7,7 +7,12 @@ const Footer = () => {
   return (
     <FooterM
       height="10vh"
-      sx={{ display: 'flex', background: customStyle.notchBG, alignItems: 'center' }}
+      sx={{
+        display: 'flex',
+        background: customStyle.notchBG,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
     >
       <Image height={65} width={230} src={VarCodeLogo} />
     </FooterM>

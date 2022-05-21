@@ -14,7 +14,7 @@ function App() {
         <Route path="/ScanCode" element={<ScanCode />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/ReviewScan" element={<ReviewScanResult />} />
-        <Route path="/ThemePreSets" element={<ContactUs />} />
+        <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/ErrorOnScan" element={<ErrorOnScan />} />
       </Routes>

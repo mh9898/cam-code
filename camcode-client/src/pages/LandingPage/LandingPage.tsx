@@ -2,7 +2,8 @@ import React, { SetStateAction, useEffect, useState } from 'react';
 import Layout from '@/layout/Layout';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import { Center, Text, Title } from '@mantine/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Button from '@/lib/Button/Button';
 
 const askLocationAccessPermission = (setter: React.Dispatch<SetStateAction<any>>) => {
   function error(err: any) {
@@ -23,7 +24,7 @@ const askLocationAccessPermission = (setter: React.Dispatch<SetStateAction<any>>
   );
 };
 const LandingPage = () => {
-  const style = useCustomTheme();
+  const navigate = useNavigate();
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
   useEffect(() => {
     askLocationAccessPermission(setCoordinates);
@@ -34,9 +35,9 @@ const LandingPage = () => {
         <Title>Smart Scanner</Title>
         <Text mt="2rem">Please allow camera and location access to continue scanning</Text>
         <Text mt="2rem">If you blocked your camera by mistake, simply refresh the page!</Text>
-        <NavLink to={'/ScanCode'} state={coordinates}>
+        <Button mt="2rem" onClick={() => navigate('/ScanCode')} state={coordinates}>
           Scan Barcode
-        </NavLink>
+        </Button>
       </Center>
     </Layout>
   );

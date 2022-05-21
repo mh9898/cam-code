@@ -1,15 +1,16 @@
 import React from 'react';
 import Layout from '@/layout/Layout';
-import { Button, Center, Title } from '@mantine/core';
+import { Center, Title } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import Button from '@/lib/Button/Button';
 
 const ErrorOnScan = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <Center sx={{ flexDirection: 'column' }}>
-        <Title>Seems Like We Couldn't Scan This Barcode</Title>
-        <Button onClick={() => navigate(-1)}>Try Again</Button>
+      <Center sx={{ flexDirection: 'column', textAlign: 'center', height: '100%' }}>
+        <Title mb="5rem">Oh, An Error Occured</Title>
+        <Button onClick={() => navigate('/ScanCode')}>Try Again</Button>
       </Center>
     </Layout>
   );

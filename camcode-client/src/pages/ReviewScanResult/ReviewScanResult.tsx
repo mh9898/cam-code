@@ -2,8 +2,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Layout from '@/layout/Layout';
-import { Button, Card, Center, Text, Title } from '@mantine/core';
-
+import { Card, Center, Text, Title } from '@mantine/core';
+import Button from '@/lib/Button/Button';
 const ReviewScanResult = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -11,20 +11,23 @@ const ReviewScanResult = () => {
   return (
     <Layout>
       <Center sx={{ flexDirection: 'column' }}>
-        <Title>Scan Result</Title>
-        <Card my="2rem" p="2rem" sx={{ background: state?.cardBg }}>
-          <Text size="lg">{state?.result}</Text>
+        <Card my="2rem" sx={{ background: state?.cardBg, width: '90%', height: '25vh' }}>
+          <Center sx={{ height: '100%' }}>
+            <Title order={3}>{state?.result}</Title>
+          </Center>
         </Card>
-        <Card my="1rem" p="1rem" onClick={() => navigate('/Feedback')}>
-          <Text>Send Us Feedback</Text>
-        </Card>
-        <Card my="1rem" p="1rem" onClick={() => navigate('/ContactUs')}>
-          <Text>Contact us</Text>
-        </Card>
-        <Card my="1rem" p="1rem">
-          <Text>{state?.result}</Text>
-        </Card>
-        <Button onClick={() => navigate(-1)}>Scan Again</Button>
+        <Button mb="1rem" sx={{ width: '50%' }} onClick={() => navigate('/Feedback')}>
+          FeedBack
+        </Button>
+        <Button my="1rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>
+          Contact Us
+        </Button>
+        <Button my="1rem" sx={{ width: '50%' }} onClick={() => navigate('/ErrorOnScan')}>
+          Survey Link
+        </Button>
+        <Button mt="1rem" sx={{ width: '50%' }} onClick={() => navigate(-1)}>
+          Scan Again
+        </Button>
       </Center>
     </Layout>
   );
