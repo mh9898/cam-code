@@ -6,7 +6,14 @@ services:
       dockerfile: ./Dockerfile-prod
     ports:
       - "8081:8081"
-
+  camcode-manager:
+    build:
+      context: ./camcode-manager
+      dockerfile: ./Dockerfile-prod
+    ports:
+      - '443:443'
+    volumes:
+      - './camcode-manager:/app'
   camcode-client:
     build:
       context: ./camcode-client
