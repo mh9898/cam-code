@@ -8,6 +8,14 @@ services:
       - "8081:8081"
     volumes:
       - './server:/app'
+  camcode-manager:
+    build:
+      context: ./camcode-manager
+      dockerfile: ./Dockerfile-dev
+    ports:
+      - '3001:3001'
+    volumes:
+      - './camcode-manager:/app'
 
   camcode-client:
     build:

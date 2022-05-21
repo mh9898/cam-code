@@ -12,6 +12,7 @@ const AppProviders = ({ children }: Props) => {
     notchBG: '#1a3b4e',
     headerIconIMG: VarCodeLogo,
     headerIconURL: 'https://www.google.com',
+    editInProgress: false,
     contentBG: '#ffffff',
     fontColor: '#000000',
     scanBarcodeInfoText:
