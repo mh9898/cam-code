@@ -6,3 +6,7 @@ export const createThemeService = async (data: ICustomStyle & ICustomThemeMetada
   customThemeData.headerIconURL = customThemeData.websiteLink;
   return await VarCodeAPI.post(`/customTheme`, customThemeData);
 };
+export const getAllThemes = async () => {
+  const { data } = await VarCodeAPI.get(`/customTheme`);
+  return data as ICustomStyle & ICustomThemeMetadata[];
+};

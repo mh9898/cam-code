@@ -11,7 +11,11 @@ const ReviewScanResult = () => {
   return (
     <Layout>
       <Center sx={{ flexDirection: 'column' }}>
-        <Card my="2rem" sx={{ background: state?.cardBg, width: '90%', height: '25vh' }}>
+        <Card
+          my="2rem"
+          radius="xl"
+          sx={{ background: state?.cardBg, width: '90%', height: '25vh' }}
+        >
           <Center sx={{ height: '100%' }}>
             <Title order={3}>{state?.result}</Title>
           </Center>

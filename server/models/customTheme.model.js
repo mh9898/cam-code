@@ -25,7 +25,7 @@ const commentsSchema = new Schema({
     type: String,
     required: true,
   },
-  themeName: {
+  companyName: {
     type: String,
     required: true,
   },

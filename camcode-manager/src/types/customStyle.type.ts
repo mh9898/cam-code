@@ -8,7 +8,8 @@ export interface ICustomStyle {
   editInProgress: boolean;
 }
 export interface ICustomThemeMetadata {
-  themeName: string;
+  _id?: string;
+  companyName: string;
   phone: string;
   email: string;
   websiteLink: string;

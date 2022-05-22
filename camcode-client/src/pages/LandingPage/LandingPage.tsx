@@ -25,6 +25,7 @@ const askLocationAccessPermission = (setter: React.Dispatch<SetStateAction<any>>
   );
 };
 const LandingPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const params: any = useParams();
   const navigate = useNavigate();
   const { setCustomStyle } = useCustomTheme();
@@ -38,22 +39,31 @@ const LandingPage = () => {
       } catch (e) {
         console.log(e);
       }
+      setIsLoading(false);
     };
     getStyle();
   }, []);
   return (
-    <Layout>
-      <Center sx={{ flexDirection: 'column', textAlign: 'center' }}>
-        <Title mt="1rem" sx={{ fontFamily: 'Poppins' }}>
-          Smart Scanner
-        </Title>
-        <Text mt="2rem">Please allow camera and location access to continue scanning</Text>
-        <Text mt="2rem">If you blocked your camera by mistake, simply refresh the page!</Text>
-        <Button mt="5rem" onClick={() => navigate('/ScanCode')} state={coordinates}>
-          Scan Barcode
-        </Button>
-      </Center>
-    </Layout>
+    <>
+      {isLoading ? (
+        <Center>
+          <Text>Loading...</Text>
+        </Center>
+      ) : (
+        <Layout>
+          <Center sx={{ flexDirection: 'column', textAlign: 'center' }}>
+            <Title mt="1rem" sx={{ fontFamily: 'Poppins' }}>
+              Smart Scanner
+            </Title>
+            <Text mt="2rem">Please allow camera and location access to continue scanning</Text>
+            <Text mt="2rem">If you blocked your camera by mistake, simply refresh the page!</Text>
+            <Button mt="5rem" onClick={() => navigate('/ScanCode')} state={coordinates}>
+              Scan Barcode
+            </Button>
+          </Center>
+        </Layout>
+      )}
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ const AppProviders = ({ children }: Props) => {
   const [customStyle, setCustomStyle] = useState({
     notchBG: '#1a3b4e',
     headerIconIMG: VarCodeLogo,
-    headerIconURL: 'https://www.google.com',
+    headerIconURL: 'https://www.varcode.com',
     editInProgress: false,
     contentBG: '#ffffff',
     fontColor: '#000000',

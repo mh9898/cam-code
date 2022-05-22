@@ -12,12 +12,19 @@ import { showNotification } from '@mantine/notifications';
 const ThemeCreator = () => {
   const [currentTheme, setCurrentTheme] = useCustomTheme();
   const [contactDetails, setContactDetails] = useState<ICustomThemeMetadata | null>(null);
+
+  console.log(currentTheme);
   const createTheme = async () => {
     if (currentTheme.headerIconIMG.length < 100) {
       alert('Please upload a logo');
       return;
     }
-    if (!contactDetails?.websiteLink) return;
+    if (!contactDetails?.websiteLink)
+      return showNotification({
+        title: 'Error',
+        message: 'please fill contact details and validate it',
+        color: 'red',
+      });
     try {
       const result = await createThemeService({ ...currentTheme, ...contactDetails });
       console.log(result);
@@ -35,6 +42,7 @@ const ThemeCreator = () => {
       });
     }
   };
+
   return (
     <Center sx={{ width: '100%', flexDirection: 'column' }}>
       <div

@@ -12,6 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/ScanCode" element={<ScanCode />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/:customThemeId" element={<LandingPage />} />
         <Route path="/ReviewScan" element={<ReviewScanResult />} />
         <Route path="/ContactUs" element={<ContactUs />} />

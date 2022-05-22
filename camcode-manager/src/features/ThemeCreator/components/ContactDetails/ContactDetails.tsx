@@ -3,6 +3,9 @@ import { useForm, zodResolver } from '@mantine/form';
 import { TextInput, Button } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ICustomThemeMetadata } from '@/types/customStyle.type';
+import { useEffect } from 'react';
+import useCustomTheme from '@/hooks/useCustomTheme';
+import useNewPreset from '@/hooks/useNewPreset';
 
 const phoneRegex =
   /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
@@ -15,15 +18,27 @@ const schema = z.object({
 });
 
 const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
+  const [isNewPreset] = useNewPreset();
+  const [customTheme, setCustomTheme] = useCustomTheme();
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      themeName: 'varcode-test',
+      companyName: '',
       websiteLink: '',
       email: '',
       phone: '',
     },
   });
+  useEffect(() => {
+    if (isNewPreset) {
+      form.setValues({
+        companyName: customTheme.companyName,
+        email: customTheme.email,
+        phone: customTheme.phone,
+        websiteLink: customTheme.websiteLink,
+      });
+    }
+  }, [isNewPreset]);
   return (
     <>
       <form
@@ -36,6 +51,12 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
           });
         })}
       >
+        <TextInput
+          required
+          label="Comapny Name"
+          placeholder="Varcode"
+          {...form.getInputProps('companyName')}
+        />
         <TextInput
           required
           label="Email"

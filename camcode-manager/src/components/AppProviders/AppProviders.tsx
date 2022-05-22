@@ -5,10 +5,12 @@ import VarCodeLogo from '@/assets/varcode-logo.png';
 import { CustomThemeContext } from '@/context/ThemeContext';
 import { ICustomStyle } from '@/types/customStyle.type';
 import { NotificationsProvider } from '@mantine/notifications';
+import { FetchPresetThemeContext } from '@/context/fetchPresetTheme';
 type Props = {
   children: React.ReactNode;
 };
 const AppProviders = ({ children }: Props) => {
+  const [isNewPreset, setIsNewPreset] = useState(false);
   const [customStyle, setCustomStyle] = useState<ICustomStyle>({
     notchBG: '#1a3b4e',
     headerIconIMG: VarCodeLogo,
@@ -26,9 +28,11 @@ const AppProviders = ({ children }: Props) => {
         <MantineProvider
           theme={{ fontFamily: 'Montserrat', headings: { fontFamily: 'Montserrat' } }}
         >
-          <CustomThemeContext.Provider value={{ customStyle, setCustomStyle }}>
-            {children}
-          </CustomThemeContext.Provider>
+          <FetchPresetThemeContext.Provider value={{ isNewPreset, setIsNewPreset }}>
+            <CustomThemeContext.Provider value={{ customStyle, setCustomStyle }}>
+              {children}
+            </CustomThemeContext.Provider>
+          </FetchPresetThemeContext.Provider>
         </MantineProvider>
       </NotificationsProvider>
     </QueryClientProvider>

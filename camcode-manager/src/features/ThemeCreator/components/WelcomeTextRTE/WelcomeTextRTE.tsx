@@ -3,6 +3,7 @@ import React, { SetStateAction, useEffect, useState } from 'react';
 import { RichTextEditor } from '@mantine/rte';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import { ICustomStyle } from '@/types/customStyle.type';
+import { log } from 'util';
 
 const WelcomeTextRte = () => {
   const [opened, setOpened] = useState(false);
