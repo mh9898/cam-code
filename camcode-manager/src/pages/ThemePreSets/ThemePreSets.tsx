@@ -5,7 +5,7 @@ import ThemeCreator from '@/features/ThemeCreator/ThemeCreator';
 
 const ThemePreSets = () => {
   return (
-    <Layout scrollStyles={<PresetsSidebar />}>
+    <Layout sidaBar={<PresetsSidebar />}>
       <ThemeCreator />
     </Layout>
   );

@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { getAllThemes } from '@/services/customTheme.service';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { deleteTheme, getAllThemes } from '@/services/customTheme.service';
 import { Anchor, Button, Card, Center, LoadingOverlay, Modal, Title } from '@mantine/core';
 import { ICustomThemeMetadata } from '@/types/customStyle.type';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import QRcode from 'react-qr-code';
 import useNewPreset from '@/hooks/useNewPreset';
+import { notifications } from '@/utils/Notifications/notifications';
+
 const ShowAllPresets = () => {
-  const [customStyle, setCustomStyle] = useCustomTheme();
-  const [isNewPreset, setIsNewPreset] = useNewPreset();
+  const queryClient = useQueryClient();
+  const [showDeleteDailogModal, setShowDeleteDailogModal] = useState(false);
+  const [__, setCustomStyle] = useCustomTheme();
+  const [_, setIsNewPreset] = useNewPreset();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState<string | undefined>('');
+  const [selectedTheme, setSelectedTheme] = useState<string>('');
   const [openQrModal, setOpenQrModal] = useState(false);
-  const fetchedPresets = useQuery('preset-list', getAllThemes, {
+  const fetchedPresets = useQuery('presetList', getAllThemes, {
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
+    refetchOnMount: true,
+    refetchInterval: 5000,
   });
-
+  const deletePresetMutate = useMutation(deleteTheme, {
+    onSuccess: () => notifications.success('Preset Deleted Successfully'),
+    onError: () => notifications.error('Error Deleting Preset'),
+  });
   const setPreset = (preset: ICustomThemeMetadata) => {
     setIsNewPreset(true);
     setOpenModal(false);
@@ -25,39 +34,57 @@ const ShowAllPresets = () => {
       setIsNewPreset(false);
     }, 1000);
   };
+  const removePreset = async () => {
+    await deletePresetMutate.mutateAsync({ id: selectedTheme });
+    await queryClient.invalidateQueries('presetList');
+    setShowDeleteDailogModal(false);
+  };
   return (
     <>
       <Button variant="outline" radius="xl" color="red" onClick={() => setOpenModal(true)}>
         Show All Presets
       </Button>
-      <Modal centered opened={openModal} onClose={() => setOpenModal(false)}>
+      <Modal
+        size="xl"
+        centered
+        opened={openModal}
+        styles={{ body: { overflowY: 'auto', maxHeight: '70vh' } }}
+        onClose={() => setOpenModal(false)}
+      >
         {fetchedPresets.isLoading && <LoadingOverlay visible />}
         {fetchedPresets.isError && <div>Error</div>}
         {fetchedPresets.isSuccess && (
           <>
-            <Center sx={{ width: '100%', flexDirection: 'column' }}>
+            <Center sx={{ flexDirection: 'column', maxHeight: '60vh', overflowY: 'auto' }}>
               {fetchedPresets.data.map((preset) => (
                 <Card key={preset._id} withBorder radius="xl" mb="2rem">
                   <Title>{preset.companyName}</Title>
                   <Center>
-                    <Button
-                      radius="xl"
-                      mr="1rem"
-                      variant="outline"
-                      onClick={() => setPreset(preset)}
-                    >
+                    <Button radius="xl" variant="outline" onClick={() => setPreset(preset)}>
                       Preview Theme
                     </Button>
                     <Button
                       radius="xl"
                       color="gray"
+                      mx="1rem"
                       variant="outline"
                       onClick={() => {
-                        setSelectedTheme(preset._id);
+                        setSelectedTheme(preset._id ?? '');
                         setOpenQrModal(true);
                       }}
                     >
                       Generate QR
+                    </Button>
+                    <Button
+                      color="red"
+                      radius="xl"
+                      variant="outline"
+                      onClick={() => {
+                        setSelectedTheme(preset._id ?? '');
+                        setShowDeleteDailogModal(true);
+                      }}
+                    >
+                      Delete Preset
                     </Button>
                   </Center>
                 </Card>
@@ -66,7 +93,13 @@ const ShowAllPresets = () => {
           </>
         )}
       </Modal>
-      <Modal opened={openQrModal} onClose={() => setOpenQrModal(false)}>
+      <Modal
+        opened={openQrModal}
+        onClose={() => {
+          setOpenQrModal(false);
+          setSelectedTheme('');
+        }}
+      >
         <Center sx={{ flexDirection: 'column' }}>
           <Anchor mb="2rem" href={`https://apps.varcode.com/${selectedTheme}`}>
             Or Press here to see the results
@@ -78,12 +111,14 @@ const ShowAllPresets = () => {
                 : 'https://apps.varcode.com'
             }
           />
-          {/*<img*/}
-          {/*  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${JSON.stringify(*/}
-          {/*    customStyle*/}
-          {/*  )}`}*/}
-          {/*  alt="qr"*/}
-          {/*/>*/}
+        </Center>
+      </Modal>
+      <Modal opened={showDeleteDailogModal} onClose={() => setShowDeleteDailogModal(false)}>
+        <Center sx={{ flexDirection: 'column', width: '100%', textAlign: 'center' }}>
+          <Title mb="1rem">Are you sure you want to delete this preset?</Title>
+          <Button color="red" radius="xl" variant="outline" onClick={removePreset}>
+            Delete
+          </Button>
         </Center>
       </Modal>
     </>

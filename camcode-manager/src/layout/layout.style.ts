@@ -3,6 +3,7 @@ import { createStyles } from '@mantine/core';
 export const layoutStyle = createStyles((theme) => ({
   root: {
     margin: 0,
+
     padding: 0,
     display: 'flex',
   },

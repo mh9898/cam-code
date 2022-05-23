@@ -4,14 +4,14 @@ import { layoutStyle } from '@/layout/layout.style';
 
 type Props = {
   children: React.ReactNode;
-  scrollStyles: React.ReactNode;
+  sidaBar: React.ReactNode;
 };
-const Layout = ({ children, scrollStyles }: Props) => {
+const Layout = ({ children, sidaBar }: Props) => {
   const { classes } = layoutStyle();
   return (
     <Container fluid classNames={classes}>
       <Container fluid classNames={classes} sx={{ flex: '1' }}>
-        {scrollStyles}
+        {sidaBar}
       </Container>
       <Container fluid classNames={classes} sx={{ flex: '4' }}>
         {children}

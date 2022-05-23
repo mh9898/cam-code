@@ -41,5 +41,15 @@ const customThemeController = {
       res.status(500).json({ message: err.message });
     }
   },
+  async deletePreset(req, res) {
+    try {
+      const customTheme = await customThemeModel.findByIdAndDelete(
+        req.params.id
+      );
+      res.status(200).json({ message: "Theme Deleted" });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
 };
 export default customThemeController;

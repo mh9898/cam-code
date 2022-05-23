@@ -8,43 +8,33 @@ import useCustomTheme from '@/hooks/useCustomTheme';
 import { ICustomStyle, ICustomThemeMetadata } from '@/types/customStyle.type';
 import { createThemeService } from '@/services/customTheme.service';
 import { showNotification } from '@mantine/notifications';
+import { notifications } from '@/utils/Notifications/notifications';
+import { useQueryClient } from 'react-query';
 
 const ThemeCreator = () => {
   const [currentTheme, setCurrentTheme] = useCustomTheme();
   const [contactDetails, setContactDetails] = useState<ICustomThemeMetadata | null>(null);
-
-  console.log(currentTheme);
+  const queryClient = useQueryClient();
   const createTheme = async () => {
     if (currentTheme.headerIconIMG.length < 100) {
       alert('Please upload a logo');
       return;
     }
     if (!contactDetails?.websiteLink)
-      return showNotification({
-        title: 'Error',
-        message: 'please fill contact details and validate it',
-        color: 'red',
-      });
+      return notifications.error('Please fill all contacts details and validate it!');
     try {
       const result = await createThemeService({ ...currentTheme, ...contactDetails });
       console.log(result);
-      showNotification({
-        title: 'Success',
-        message: 'Theme created!',
-        color: 'green',
-      });
+      notifications.success('Theme Created Successfully');
+      await queryClient.invalidateQueries('presetList');
     } catch (e) {
       console.log(e);
-      showNotification({
-        title: 'Error',
-        message: 'Something went wrong',
-        color: 'red',
-      });
+      notifications.error('Error Creating Theme');
     }
   };
 
   return (
-    <Center sx={{ width: '100%', flexDirection: 'column' }}>
+    <Center sx={{ width: '100%', flexDirection: 'column', overflowY: 'auto', maxHeight: '100%' }}>
       <div
         style={{
           display: 'grid',

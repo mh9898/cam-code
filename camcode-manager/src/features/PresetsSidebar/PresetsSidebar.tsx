@@ -7,7 +7,13 @@ import ShowAllPresets from '@/features/ShowAllPresets/ShowAllPresets';
 const PresetsSidebar = () => {
   return (
     <Center
-      sx={{ width: '100%', background: '#fff4ed', minHeight: '100vh', flexDirection: 'column' }}
+      sx={{
+        width: '100%',
+        background: '#fff4ed',
+        minHeight: '100vh',
+        flexDirection: 'column',
+        maxWidth: '370px',
+      }}
       py="1rem"
     >
       <ShowAllPresets />
