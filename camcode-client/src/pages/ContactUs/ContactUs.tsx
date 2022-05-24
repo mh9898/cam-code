@@ -1,16 +1,16 @@
 import React from 'react';
 import Layout from '@/layout/Layout';
 import useCustomTheme from '@/hooks/useCustomTheme';
-import { Center, Text } from '@mantine/core';
+import { Anchor, Center, Text } from '@mantine/core';
 
 const ContactUs = () => {
   const { customStyle } = useCustomTheme();
   return (
     <Layout>
-      <Center sx={{ flexDirection: 'column' }}>
+      <Center sx={{ flexDirection: 'column', height: '100%' }}>
         <Text>Email: {customStyle.email}</Text>
         <Text>Phone: {customStyle.phone}</Text>
-        <Text>Link to Website: {customStyle.websiteLink}</Text>
+        <Anchor href={customStyle.websiteLink}>Link to Website</Anchor>
       </Center>
     </Layout>
   );

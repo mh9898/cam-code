@@ -19,13 +19,18 @@ const Feedback = () => {
     setImages(imageList as any[]);
   };
   const submitFeedback = async () => {
-    const res = await sendFeedback(
-      customStyle.barcode,
-      feedback,
-      images[0]?.dataURL.split(',')[1],
-      images[1]?.dataURL.split(',')[1],
-      images[2]?.dataURL.split(',')[1]
-    );
+    try {
+      const res = await sendFeedback(
+        customStyle.barcode,
+        feedback,
+        images[0]?.dataURL.split(',')[1],
+        images[1]?.dataURL.split(',')[1],
+        images[2]?.dataURL.split(',')[1]
+      );
+    } catch (e) {
+      console.log(e);
+    }
+    navigate(-1);
   };
   return (
     <Layout>
