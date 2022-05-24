@@ -4,6 +4,7 @@ import { SendBarcode } from "../services/barcode.service.js";
 const proxyRouter = Router();
 
 proxyRouter.post("/barcode", async (req, res) => {
+  console.log(req.body);
   const apiBarCodeResponse = await SendBarcode({
     barcode: req.body.barcode,
     lat: req.body.lat,
@@ -21,6 +22,7 @@ proxyRouter.post("/barcode", async (req, res) => {
   });
 });
 proxyRouter.post("/feedback", async (req, res) => {
+  console.log(req.body);
   const apiBarCodeResponse = await SendBarcode({
     barcode: req.body.barcode,
     feedBack: req.body.feedback,

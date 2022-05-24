@@ -22,9 +22,9 @@ const Feedback = () => {
     const res = await sendFeedback(
       customStyle.barcode,
       feedback,
-      images[0]?.dataURL,
-      images[1]?.dataURL,
-      images[2]?.dataURL
+      images[0]?.dataURL.split(',')[1],
+      images[1]?.dataURL.split(',')[1],
+      images[2]?.dataURL.split(',')[1]
     );
   };
   return (

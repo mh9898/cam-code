@@ -10,7 +10,6 @@ export const SendBarcode = async ({
   img3,
 }) => {
   try {
-    console.log(barcode, img, feedBack);
     const { data } = await varCodeDev.post("/SetBarcodeJson", {
       bDeliveryNoteFlag: true,
       sDeliveryNote: feedBack || "no-feedback",
