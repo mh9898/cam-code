@@ -57,7 +57,11 @@ const LandingPage = () => {
             </Title>
             <Text mt="2rem">Please allow camera and location access to continue scanning</Text>
             <Text mt="2rem">If you blocked your camera by mistake, simply refresh the page!</Text>
-            <Button mt="5rem" onClick={() => navigate('/ScanCode')} state={coordinates}>
+            <Button
+              mt="5rem"
+              onClick={() => navigate('/ScanCode', { state: { ...coordinates } })}
+              state={coordinates}
+            >
               Scan Barcode
             </Button>
           </Center>

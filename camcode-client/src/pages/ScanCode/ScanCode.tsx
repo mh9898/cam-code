@@ -38,8 +38,8 @@ const ScanCode = () => {
 
   useEffect(() => {
     const sendRequest = async () => {
+      console.log(state);
       if (code.length > 12) {
-        console.log(code);
         handleSendBarcode.mutate({
           barcode: code.slice(1),
           //@ts-ignore

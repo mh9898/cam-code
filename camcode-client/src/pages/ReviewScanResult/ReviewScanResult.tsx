@@ -20,12 +20,12 @@ const ReviewScanResult = () => {
             <Title order={3}>{state?.result}</Title>
           </Center>
         </Card>
-        {/*<Button mb="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/Feedback')}>*/}
-        {/*  FeedBack*/}
-        {/*</Button>*/}
-        {/*<Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>*/}
-        {/*  Contact Us*/}
-        {/*</Button>*/}
+        <Button mb="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/Feedback')}>
+          FeedBack
+        </Button>
+        <Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>
+          Contact Us
+        </Button>
         {/*<Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ErrorOnScan')}>*/}
         {/*  Survey Link*/}
         {/*</Button>*/}

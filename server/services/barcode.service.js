@@ -2,6 +2,7 @@ import { varCodeDev } from "./axios.config.js";
 
 export const SendBarcode = async (barcode, lat, long) => {
   try {
+    console.log(barcode, lat, long);
     const { data } = await varCodeDev.post("/SetBarcodeJson", {
       bDeliveryNoteFlag: true,
       sDeliveryNote: "note-camcode-client",
