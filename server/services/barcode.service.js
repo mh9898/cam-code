@@ -1,11 +1,19 @@
 import { varCodeDev } from "./axios.config.js";
 
-export const SendBarcode = async (barcode, lat, long) => {
+export const SendBarcode = async ({
+  barcode,
+  lat,
+  long,
+  feedBack,
+  img,
+  img2,
+  img3,
+}) => {
   try {
-    console.log(barcode, lat, long);
+    console.log(barcode, img, feedBack);
     const { data } = await varCodeDev.post("/SetBarcodeJson", {
       bDeliveryNoteFlag: true,
-      sDeliveryNote: "note-camcode-client",
+      sDeliveryNote: feedBack || "no-feedback",
       sUserName: "name-camcode-client",
       sUserCompany: "company-camcode-client",
       sUserAddress: "add-camcode-client",
@@ -18,11 +26,11 @@ export const SendBarcode = async (barcode, lat, long) => {
       sdeviceType: "",
       sBarcode: barcode, //required
       sUpc: "upc",
-      dLatitud: Number(lat),
-      dLongitud: Number(long),
-      Img: "",
-      Img2: "",
-      Img3: "",
+      dLatitud: Number(lat) || 0.0,
+      dLongitud: Number(long) || 0.0,
+      Img: img || " ",
+      Img2: img2 || " ",
+      Img3: img3 || " ",
       langCode: "",
       offlineTime: "",
     });

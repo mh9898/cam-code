@@ -7,10 +7,10 @@ const ContactUs = () => {
   const { customStyle } = useCustomTheme();
   return (
     <Layout>
-      <Center>
-        <Text>Email: ${customStyle.email}</Text>
-        <Text>Phone: ${customStyle.phone}</Text>
-        <Text>Link to Website: ${customStyle.websiteLink}</Text>
+      <Center sx={{ flexDirection: 'column' }}>
+        <Text>Email: {customStyle.email}</Text>
+        <Text>Phone: {customStyle.phone}</Text>
+        <Text>Link to Website: {customStyle.websiteLink}</Text>
       </Center>
     </Layout>
   );

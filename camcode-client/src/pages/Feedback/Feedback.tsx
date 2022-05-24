@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/layout/Layout';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import { Center, Text, Textarea } from '@mantine/core';
 import Button from '@/lib/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { sendFeedback } from '@/services/barcode.service';
+import useCustomTheme from '@/hooks/useCustomTheme';
 
 const Feedback = () => {
-  const [images, setImages] = React.useState([]);
+  const [feedback, setFeedback] = useState('');
+  const { customStyle } = useCustomTheme();
+  const [images, setImages] = React.useState<any[]>([]);
   const maxNumber = 3;
   const navigate = useNavigate();
   const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
-    setImages(imageList as never[]);
+    setImages(imageList as any[]);
+  };
+  const submitFeedback = async () => {
+    const res = await sendFeedback(
+      customStyle.barcode,
+      feedback,
+      images[0]?.dataURL,
+      images[1]?.dataURL,
+      images[2]?.dataURL
+    );
   };
   return (
     <Layout>
@@ -20,7 +33,14 @@ const Feedback = () => {
         <Button onClick={() => navigate(-1)} mt="1rem">
           Back
         </Button>
-        <Textarea rows={5} sx={{ width: '100%' }} my="2rem" placeholder="write some feedback" />
+        <Textarea
+          value={feedback}
+          onChange={(e) => setFeedback(e.currentTarget.value)}
+          rows={5}
+          sx={{ width: '100%' }}
+          my="2rem"
+          placeholder="write some feedback"
+        />
         <ImageUploading multiple value={images} onChange={onChange} maxNumber={maxNumber}>
           {({
             imageList,
@@ -59,7 +79,9 @@ const Feedback = () => {
             </Center>
           )}
         </ImageUploading>
-        <Button mt="1rem">Send</Button>
+        <Button mt="1rem" onClick={submitFeedback}>
+          Send
+        </Button>
       </Center>
     </Layout>
   );

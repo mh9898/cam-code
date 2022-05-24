@@ -18,7 +18,7 @@ export const getHexColor = (number: string) => {
 };
 
 const ScanCode = () => {
-  const { customStyle } = useCustomTheme();
+  const { customStyle, setCustomStyle } = useCustomTheme();
   const { state } = useLocation();
   const [code, setCode] = useState<string>('');
   const [value, onChange] = useState(customStyle.scanBarcodeInfoText);
@@ -40,6 +40,7 @@ const ScanCode = () => {
     const sendRequest = async () => {
       console.log(state);
       if (code.length > 12) {
+        setCustomStyle((prev: any) => ({ ...prev, barcode: code.slice(1) }));
         handleSendBarcode.mutate({
           barcode: code.slice(1),
           //@ts-ignore
