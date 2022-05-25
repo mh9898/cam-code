@@ -24,8 +24,9 @@ const ThemeCreator = () => {
       return notifications.error('Please fill all contacts details and validate it!');
     try {
       const result = await createThemeService({ ...currentTheme, ...contactDetails });
-      console.log(result);
-      notifications.success('Theme Created Successfully');
+      if (result?.data?.message.includes('Updated'))
+        notifications.success('Theme updated successfully!');
+      else notifications.success('Theme created Successfully');
       await queryClient.invalidateQueries('presetList');
     } catch (e) {
       console.log(e);
