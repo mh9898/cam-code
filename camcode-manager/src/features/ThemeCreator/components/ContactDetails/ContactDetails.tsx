@@ -9,8 +9,7 @@ import useNewPreset from '@/hooks/useNewPreset';
 
 const phoneRegex =
   /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
-const urlsRegex =
-  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+const urlsRegex = /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 const schema = z.object({
   websiteLink: z.string().regex(urlsRegex, { message: 'Website url is invalid' }),
   email: z.string().email({ message: 'Invalid email' }),
@@ -66,7 +65,7 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
         <TextInput
           required
           label="Website Link"
-          placeholder="www.varcode.com"
+          placeholder="https://www.varcode.com"
           mt="sm"
           {...form.getInputProps('websiteLink')}
         />
