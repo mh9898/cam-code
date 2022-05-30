@@ -19,6 +19,7 @@ const AppProviders = ({ children }: Props) => {
     editInProgress: false,
     contentBG: '#ffffff',
     fontColor: '#000000',
+    surveyLink: '',
     scanBarcodeInfoText:
       '<h3><strong>Welcome!</strong></h3><h4><strong>you have just unpacked your box containing you meal-kits!</strong></h4><h4>scan the enclosed tag to provide us feedback and information, to ensure your satisfaction with our service</h4><p><br></p>',
   });

@@ -12,7 +12,7 @@ export const SendBarcode = async ({
   try {
     const dataToSend = {
       bDeliveryNoteFlag: true,
-      sDeliveryNote: "",
+      sDeliveryNote: feedBack || "no-feedback",
       sUserName: "name-camcode-client",
       sUserCompany: "company-camcode-client",
       sUserAddress: "add-camcode-client",
@@ -32,7 +32,33 @@ export const SendBarcode = async ({
       Img3: img3 || " ",
       langCode: "",
       offlineTime: "",
+    };
+    console.log(dataToSend);
+    const { data } = await varCodeDev.post("/SetBarcodeJson", dataToSend);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const sendFeedback = async ({
+  iScanID,
+  barcode,
+  feedBack,
+  img,
+  img2,
+  img3,
+}) => {
+  try {
+    const dataToSend = {
+      sAuthToken: "v3Tr#eus",
+      sDeliveryNote: feedBack || "SUCCESSFULLY FELIVERD",
       sFeedback: feedBack || "no-feedback",
+      iScanID,
+      sUpc: barcode,
+      Img: img || " ",
+      Img2: img2 || " ",
+      Img3: img3 || " ",
     };
     console.log(dataToSend);
     const { data } = await varCodeDev.post("/SetBarcodeJson", dataToSend);

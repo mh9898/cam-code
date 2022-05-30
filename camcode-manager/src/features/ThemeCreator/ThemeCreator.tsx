@@ -23,7 +23,7 @@ const ThemeCreator = () => {
       return notifications.error('Please fill all contacts details and validate it!');
     try {
       const result = await createThemeService({ ...currentTheme, ...contactDetails });
-      if (result?.data?.message.includes('Updated'))
+      if (result?.data?.message?.includes('Updated'))
         notifications.success('Theme updated successfully!');
       else notifications.success('Theme created Successfully');
       await queryClient.invalidateQueries('presetList');
@@ -34,7 +34,15 @@ const ThemeCreator = () => {
   };
 
   return (
-    <Center sx={{ width: '100%', flexDirection: 'column', overflowY: 'auto', maxHeight: '100%' }}>
+    <Center
+      sx={{
+        width: '90%',
+        flexDirection: 'column',
+        overflowY: 'auto',
+        maxHeight: '100%',
+      }}
+      my="2rem"
+    >
       <div
         style={{
           display: 'grid',

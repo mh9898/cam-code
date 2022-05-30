@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Layout from '@/layout/Layout';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
-import { Center, Text, Textarea } from '@mantine/core';
+import { Center, Textarea } from '@mantine/core';
 import Button from '@/lib/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { sendFeedback } from '@/services/barcode.service';
 import useCustomTheme from '@/hooks/useCustomTheme';
+import { showNotification } from '@mantine/notifications';
 
 const Feedback = () => {
   const [feedback, setFeedback] = useState('');
   const { customStyle } = useCustomTheme();
+
   const [images, setImages] = React.useState<any[]>([]);
   const maxNumber = 3;
   const navigate = useNavigate();
@@ -23,12 +25,23 @@ const Feedback = () => {
       const res = await sendFeedback(
         customStyle.barcode,
         feedback,
-        images[0]?.dataURL.split(',')[1],
+        customStyle.iScanID,
+        customStyle.images[0]?.dataURL.split(',')[1],
         images[1]?.dataURL.split(',')[1],
         images[2]?.dataURL.split(',')[1]
       );
+      showNotification({
+        title: 'Feedback sent successfully',
+        message: 'Thank you for your feedback',
+        color: 'green',
+      });
     } catch (e) {
       console.log(e);
+      showNotification({
+        title: 'There was an error sending your feedback',
+        message: 'Please try again later',
+        color: 'red',
+      });
     }
     navigate(-1);
   };

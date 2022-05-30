@@ -5,6 +5,8 @@ export interface ICustomStyle {
   contentBG: string;
   scanBarcodeInfoText: string;
   fontColor: string;
+  surveyLink: string;
+  iScanID: string;
   editInProgress: boolean;
 }
 export interface ICustomThemeMetadata {

@@ -11,11 +11,12 @@ export const sendBarcode = async ({ barcode, long, lat }: SendBarcodeParams) => 
 export const sendFeedback = async (
   barcode: string,
   feedback: string,
+  iScanID: string,
   img: string | undefined,
   img2: string | undefined,
   img3: string | undefined
 ) => {
-  const params = { barcode, feedback, img, img2, img3 };
+  const params = { iScanID, barcode, feedback, img, img2, img3 };
   console.log(img, feedback);
   const { data } = await varCodeDev.post('/proxy/feedback', params);
   return data;

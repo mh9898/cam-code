@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SendBarcode } from "../services/barcode.service.js";
+import { SendBarcode, sendFeedback } from "../services/barcode.service.js";
 
 const proxyRouter = Router();
 
@@ -23,7 +23,8 @@ proxyRouter.post("/barcode", async (req, res) => {
 });
 proxyRouter.post("/feedback", async (req, res) => {
   console.log(req.body);
-  const apiBarCodeResponse = await SendBarcode({
+  const apiBarCodeResponse = await sendFeedback({
+    iScanID: req.body.iScanID,
     barcode: req.body.barcode,
     feedBack: req.body.feedback,
     img: req.body.img,
@@ -32,7 +33,7 @@ proxyRouter.post("/feedback", async (req, res) => {
   });
   const result = JSON.parse(apiBarCodeResponse.d);
   if (result.scid == 0) {
-    res.status(500).send({ message: "barcode scan error" });
+    res.status(500).send({ message: "feedback send error" });
     return;
   }
   res.json({

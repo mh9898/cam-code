@@ -4,13 +4,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Layout from '@/layout/Layout';
 import { Card, Center, Text, Title } from '@mantine/core';
 import Button from '@/lib/Button/Button';
+import useCustomTheme from '@/hooks/useCustomTheme';
+import { log } from 'util';
 const ReviewScanResult = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { customStyle } = useCustomTheme();
 
   return (
     <Layout>
-      <Center sx={{ flexDirection: 'column' }}>
+      <Center sx={{ flexDirection: 'column', textAlign: 'center' }}>
+        <Text>{state.sQuality}</Text>
         <Card
           my="2rem"
           radius="xl"
@@ -26,9 +30,15 @@ const ReviewScanResult = () => {
         <Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ContactUs')}>
           Contact Us
         </Button>
-        {/*<Button my="0.5rem" sx={{ width: '50%' }} onClick={() => navigate('/ErrorOnScan')}>*/}
-        {/*  Survey Link*/}
-        {/*</Button>*/}
+        {customStyle.surveyLink && (
+          <Button
+            my="0.5rem"
+            sx={{ width: '50%' }}
+            onClick={() => (location.href = customStyle.surveyLink)}
+          >
+            Survey Link
+          </Button>
+        )}
         <Button mt="4rem" sx={{ width: '50%' }} color="red" onClick={() => navigate(-1)}>
           Scan Again
         </Button>

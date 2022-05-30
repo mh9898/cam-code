@@ -11,6 +11,7 @@ const phoneRegex =
   /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 const urlsRegex = /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 const schema = z.object({
+  companyName: z.string().nonempty(),
   websiteLink: z.string().regex(urlsRegex, { message: 'Website url is invalid' }),
   email: z.string().email({ message: 'Invalid email' }),
   phone: z.string().min(3, { message: 'Phone number must be at least 3 numbers' }),
@@ -26,6 +27,7 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
       websiteLink: '',
       email: '',
       phone: '',
+      surveyLink: '',
     },
   });
   useEffect(() => {
@@ -35,6 +37,7 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
         email: customTheme.email,
         phone: customTheme.phone,
         websiteLink: customTheme.websiteLink,
+        surveyLink: customTheme.surveyLink,
       });
     }
   }, [isNewPreset]);
@@ -64,7 +67,7 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
         />
         <TextInput
           required
-          label="Website Link"
+          label="Website Link (must include http(s):// )"
           placeholder="https://www.varcode.com"
           mt="sm"
           {...form.getInputProps('websiteLink')}
@@ -75,6 +78,12 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
           placeholder="Company phone number"
           mt="sm"
           {...form.getInputProps('phone')}
+        />
+        <TextInput
+          label="Survey Link "
+          placeholder="Survey link is optional (must include http(s):// )"
+          mt="sm"
+          {...form.getInputProps('surveyLink')}
         />
         <Button variant="outline" radius="xl" mt="1rem" type="submit">
           Validate

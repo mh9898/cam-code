@@ -23,17 +23,19 @@ const ScanCode = () => {
   const [code, setCode] = useState<string>('');
   const [value, onChange] = useState(customStyle.scanBarcodeInfoText);
   const navigate = useNavigate();
-  console.log(customStyle);
 
   const handleSendBarcode = useMutation(sendBarcode, {
     onError: () => navigate('/ErrorOnScan'),
-    onSuccess: (res) =>
+    onSuccess: (res) => {
+      setCustomStyle((prev: any) => ({ ...prev, iScanID: res.message.iScanID }));
       navigate('/ReviewScan', {
         state: {
           cardBg: getHexColor(res.message.nBColor),
           result: res.message.sConfirmationText,
+          sQuality: res.message.sQuality,
         },
-      }),
+      });
+    },
   });
 
   useEffect(() => {

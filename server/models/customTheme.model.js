@@ -41,6 +41,9 @@ const commentsSchema = new Schema({
     type: String,
     required: true,
   },
+  surveyLink: {
+    type: String,
+  },
 });
 
 export default model("Custom-Themes", commentsSchema);

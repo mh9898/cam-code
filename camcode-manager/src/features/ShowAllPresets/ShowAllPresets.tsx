@@ -48,7 +48,7 @@ const ShowAllPresets = () => {
         size="xl"
         centered
         opened={openModal}
-        styles={{ body: { overflowY: 'auto', maxHeight: '70vh' } }}
+        styles={{ body: { overflowY: 'auto', maxHeight: '50vh' } }}
         onClose={() => setOpenModal(false)}
       >
         {fetchedPresets.isLoading && <LoadingOverlay visible />}
