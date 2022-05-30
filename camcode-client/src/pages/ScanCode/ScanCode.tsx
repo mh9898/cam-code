@@ -31,7 +31,7 @@ const ScanCode = () => {
       navigate('/ReviewScan', {
         state: {
           cardBg: getHexColor(res.message.nBColor),
-          result: res.message.sConfirmationText.slice(5),
+          result: res.message.sConfirmationText,
         },
       }),
   });
@@ -73,7 +73,10 @@ const ScanCode = () => {
         />
         {!code && (
           <div style={{ width: '90vw' }}>
-            <Text>try changing the barcode's distance from the camera</Text>
+            <Text>
+              If you are having trouble scanning the tag, change the barcode’s distance from the
+              camera.
+            </Text>
             <BarCodeScanner
               onUpdate={(err, resp): void => {
                 if (resp) {

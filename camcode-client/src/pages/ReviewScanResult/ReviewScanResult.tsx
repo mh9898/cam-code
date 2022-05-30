@@ -16,7 +16,7 @@ const ReviewScanResult = () => {
           radius="xl"
           sx={{ background: state?.cardBg, width: '90%', height: '25vh' }}
         >
-          <Center sx={{ height: '100%' }}>
+          <Center sx={{ height: '100%', textAlign: 'center' }}>
             <Title order={3}>{state?.result}</Title>
           </Center>
         </Card>

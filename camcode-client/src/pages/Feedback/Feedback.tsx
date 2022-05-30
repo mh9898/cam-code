@@ -85,7 +85,7 @@ const Feedback = () => {
           )}
         </ImageUploading>
         <Button mt="1rem" onClick={submitFeedback}>
-          Send
+          Submit
         </Button>
       </Center>
     </Layout>

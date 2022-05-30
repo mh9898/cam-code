@@ -10,9 +10,9 @@ export const SendBarcode = async ({
   img3,
 }) => {
   try {
-    const { data } = await varCodeDev.post("/SetBarcodeJson", {
+    const dataToSend = {
       bDeliveryNoteFlag: true,
-      sDeliveryNote: feedBack || "no-feedback",
+      sDeliveryNote: "",
       sUserName: "name-camcode-client",
       sUserCompany: "company-camcode-client",
       sUserAddress: "add-camcode-client",
@@ -23,7 +23,7 @@ export const SendBarcode = async ({
       sUserEmail: "email@-camcode-client",
       sswVersion: "",
       sdeviceType: "",
-      sBarcode: barcode, //required
+      sBarcode: barcode ?? "12312312", //required
       sUpc: "upc",
       dLatitud: Number(lat) || 0.0,
       dLongitud: Number(long) || 0.0,
@@ -32,7 +32,10 @@ export const SendBarcode = async ({
       Img3: img3 || " ",
       langCode: "",
       offlineTime: "",
-    });
+      sFeedback: feedBack || "no-feedback",
+    };
+    console.log(dataToSend);
+    const { data } = await varCodeDev.post("/SetBarcodeJson", dataToSend);
     return data;
   } catch (error) {
     console.log(error);
