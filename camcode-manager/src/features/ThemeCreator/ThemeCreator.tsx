@@ -7,7 +7,6 @@ import ContactDetails from '@/features/ThemeCreator/components/ContactDetails/Co
 import useCustomTheme from '@/hooks/useCustomTheme';
 import { ICustomStyle, ICustomThemeMetadata } from '@/types/customStyle.type';
 import { createThemeService } from '@/services/customTheme.service';
-import { showNotification } from '@mantine/notifications';
 import { notifications } from '@/utils/Notifications/notifications';
 import { useQueryClient } from 'react-query';
 
