@@ -10,9 +10,9 @@ const Header = () => {
     <header>
       <meta name="theme-color" content={customStyle.notchBG} />
       <Container classNames={classes} fluid>
-        <Anchor m="1rem" href={customStyle.headerIconURL}>
-          <Image src={customStyle.headerIconIMG} />
-        </Anchor>
+        {/*<Anchor m="1rem" href={customStyle.headerIconURL}>*/}
+        <Image src={customStyle.headerIconIMG} />
+        {/*</Anchor>*/}
       </Container>
     </header>
   );
