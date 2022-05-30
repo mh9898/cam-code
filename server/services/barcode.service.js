@@ -33,7 +33,6 @@ export const SendBarcode = async ({
       langCode: "",
       offlineTime: "",
     };
-    console.log(dataToSend);
     const { data } = await varCodeDev.post("/SetBarcodeJson", dataToSend);
     return data;
   } catch (error) {
@@ -61,7 +60,7 @@ export const sendFeedback = async ({
       Img3: img3 || " ",
     };
     console.log(dataToSend);
-    const { data } = await varCodeDev.post("/SetBarcodeJson", dataToSend);
+    const { data } = await varCodeDev.post("/SetDeliveryNote", dataToSend);
     return data;
   } catch (error) {
     console.log(error);
