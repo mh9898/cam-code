@@ -59,7 +59,6 @@ export const sendFeedback = async ({
       Img2: img2 || " ",
       Img3: img3 || " ",
     };
-    console.log(dataToSend);
     const { data } = await varCodeDev.post("/SetDeliveryNote", dataToSend);
     return data;
   } catch (error) {

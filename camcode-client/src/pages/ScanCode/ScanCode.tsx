@@ -27,8 +27,7 @@ const ScanCode = () => {
   const handleSendBarcode = useMutation(sendBarcode, {
     onError: () => navigate('/ErrorOnScan'),
     onSuccess: (res) => {
-      console.log(res.message)
-      setCustomStyle((prev: any) => ({ ...prev, iScanID: res.message.iScanID }));
+      setCustomStyle((prev: any) => ({ ...prev, iScanID: res.message.scid }));
       navigate('/ReviewScan', {
         state: {
           cardBg: getHexColor(res.message.nBColor),
@@ -41,7 +40,6 @@ const ScanCode = () => {
 
   useEffect(() => {
     const sendRequest = async () => {
-      console.log(state);
       if (code.length > 12) {
         setCustomStyle((prev: any) => ({ ...prev, barcode: code.slice(1) }));
         handleSendBarcode.mutate({

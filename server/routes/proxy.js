@@ -4,7 +4,6 @@ import { SendBarcode, sendFeedback } from "../services/barcode.service.js";
 const proxyRouter = Router();
 
 proxyRouter.post("/barcode", async (req, res) => {
-  console.log(req.body);
   const apiBarCodeResponse = await SendBarcode({
     barcode: req.body.barcode,
     lat: req.body.lat,
@@ -22,6 +21,11 @@ proxyRouter.post("/barcode", async (req, res) => {
   });
 });
 proxyRouter.post("/feedback", async (req, res) => {
+  try{
+
+  }catch (e) {
+
+  }
   const feedbackRes = await sendFeedback({
     iScanID: req.body.iScanID,
     barcode: req.body.barcode,
@@ -30,11 +34,14 @@ proxyRouter.post("/feedback", async (req, res) => {
     img2: req.body.img2,
     img3: req.body.img3,
   });
-  console.log(feedbackRes)
   const result = JSON.parse(feedbackRes);
+  console.log(feedbackRes)
   if (result.scid == 0) {
-    res.status(500).send({ message: "feedback send error" });
+    res.status(500).send({ message: "feedback properties error" });
     return;
+  }
+  if(result === null){
+    return res.status(501).send({message: "server didn't respond"})
   }
   res.json({
     message: result,

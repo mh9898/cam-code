@@ -11,18 +11,15 @@ const customThemeController = {
   },
   async createCustomTheme(req, res) {
     try {
-      console.log(req.body);
       const isThemeAlreadyExist = await customThemeModel.findOne({
         companyName: req.body.companyName,
       });
       if (isThemeAlreadyExist) {
-        console.log("Theme already exist");
         const newDoc = await customThemeModel.findByIdAndUpdate(
           { _id: isThemeAlreadyExist._id },
           req.body,
           { new: true }
         );
-        console.log(newDoc);
         res.status(200).json({ message: "Theme Updated" });
         return;
       }

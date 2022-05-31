@@ -46,7 +46,6 @@ const ContactDetails = ({ setContactDetails }: { setContactDetails: any }) => {
       <form
         onSubmit={form.onSubmit((values: ICustomThemeMetadata) => {
           setContactDetails(values);
-          console.log(values);
           showNotification({
             title: 'Details Verified',
             message: 'You can now submit your theme',
