@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { sendFeedback } from '@/services/barcode.service';
 import useCustomTheme from '@/hooks/useCustomTheme';
 import { showNotification } from '@mantine/notifications';
+import './feedback.css'
 
 const Feedback = () => {
   const [feedback, setFeedback] = useState('');
@@ -26,7 +27,7 @@ const Feedback = () => {
         customStyle.barcode,
         feedback,
         customStyle.iScanID,
-        customStyle.images[0]?.dataURL.split(',')[1],
+        images[0]?.dataURL.split(',')[1],
         images[1]?.dataURL.split(',')[1],
         images[2]?.dataURL.split(',')[1]
       );
@@ -69,7 +70,6 @@ const Feedback = () => {
             isDragging,
             dragProps,
           }) => (
-            // write your building UI
             <Center sx={{ flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
               <Center mb="1rem" sx={{ justifyContent: 'space-between', width: '100%' }}>
                 <Button
