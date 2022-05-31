@@ -55,9 +55,9 @@ const ShowAllPresets = () => {
         {fetchedPresets.isError && <div>Error</div>}
         {fetchedPresets.isSuccess && (
           <>
-            <Center sx={{ flexDirection: 'column', maxHeight: '60vh', overflowY: 'auto' }}>
+            <Center sx={{ flexDirection: 'column', overflowY: 'auto' }}>
               {fetchedPresets.data.map((preset) => (
-                <Card key={preset._id} withBorder radius="xl" mb="2rem">
+                <Card key={preset._id} withBorder p="0.5rem" radius="xl" mb="1rem">
                   <Title>{preset.companyName}</Title>
                   <Center>
                     <Button radius="xl" variant="outline" onClick={() => setPreset(preset)}>
