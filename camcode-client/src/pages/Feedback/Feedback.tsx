@@ -18,11 +18,12 @@ const Feedback = () => {
   const navigate = useNavigate();
   const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList as any[]);
   };
   const submitFeedback = async () => {
     try {
+      console.log(customStyle.iScanID)
+      console.log(images[0])
       const res = await sendFeedback(
         customStyle.barcode,
         feedback,
@@ -31,6 +32,7 @@ const Feedback = () => {
         images[1]?.dataURL.split(',')[1],
         images[2]?.dataURL.split(',')[1]
       );
+
       showNotification({
         title: 'Feedback sent successfully',
         message: 'Thank you for your feedback',
