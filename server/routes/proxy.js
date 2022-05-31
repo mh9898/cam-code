@@ -34,9 +34,9 @@ proxyRouter.post("/feedback", async (req, res) => {
     img2: req.body.img2,
     img3: req.body.img3,
   });
-  const result = JSON.parse(feedbackRes);
+  const result = feedbackRes;
   console.log(feedbackRes)
-  if (result.scid == 0) {
+  if (result?.scid === 0) {
     res.status(500).send({ message: "feedback properties error" });
     return;
   }
