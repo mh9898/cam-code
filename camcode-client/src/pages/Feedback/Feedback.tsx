@@ -12,7 +12,7 @@ import './feedback.css'
 const Feedback = () => {
   const [feedback, setFeedback] = useState('');
   const { customStyle } = useCustomTheme();
-
+  const [loading, setLoading] = useState(false);
   const [images, setImages] = React.useState<any[]>([]);
   const maxNumber = 3;
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ const Feedback = () => {
   };
   const submitFeedback = async () => {
     try {
+      setLoading(true)
       console.log(customStyle.iScanID)
-      console.log(images[0])
       const res = await sendFeedback(
         customStyle.barcode,
         feedback,
@@ -32,7 +32,7 @@ const Feedback = () => {
         images[1]?.dataURL.split(',')[1],
         images[2]?.dataURL.split(',')[1]
       );
-
+      setLoading(true)
       showNotification({
         title: 'Feedback sent successfully',
         message: 'Thank you for your feedback',
@@ -99,7 +99,7 @@ const Feedback = () => {
             </Center>
           )}
         </ImageUploading>
-        <Button mt="1rem" onClick={submitFeedback}>
+        <Button mt="1rem" onClick={submitFeedback} loading={loading}>
           Submit
         </Button>
       </Center>

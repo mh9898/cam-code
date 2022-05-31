@@ -27,6 +27,7 @@ const ScanCode = () => {
   const handleSendBarcode = useMutation(sendBarcode, {
     onError: () => navigate('/ErrorOnScan'),
     onSuccess: (res) => {
+      console.log(res.message)
       setCustomStyle((prev: any) => ({ ...prev, iScanID: res.message.iScanID }));
       navigate('/ReviewScan', {
         state: {

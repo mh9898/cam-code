@@ -22,8 +22,7 @@ proxyRouter.post("/barcode", async (req, res) => {
   });
 });
 proxyRouter.post("/feedback", async (req, res) => {
-  console.log(req.body);
-  const apiBarCodeResponse = await sendFeedback({
+  const feedbackRes = await sendFeedback({
     iScanID: req.body.iScanID,
     barcode: req.body.barcode,
     feedBack: req.body.feedback,
@@ -31,7 +30,8 @@ proxyRouter.post("/feedback", async (req, res) => {
     img2: req.body.img2,
     img3: req.body.img3,
   });
-  const result = JSON.parse(apiBarCodeResponse.d);
+  console.log(feedbackRes)
+  const result = JSON.parse(feedbackRes);
   if (result.scid == 0) {
     res.status(500).send({ message: "feedback send error" });
     return;
