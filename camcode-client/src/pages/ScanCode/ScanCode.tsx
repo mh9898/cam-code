@@ -11,6 +11,8 @@ import useCustomTheme from '@/hooks/useCustomTheme';
 import { useMutation } from 'react-query';
 import ErrorOnScan from '@/pages/ErrorOnScan/ErrorOnScan';
 
+//mh commit
+
 export const getHexColor = (number: string) => {
   const strToNum = Number(number);
   if (!strToNum) return '#989a81';
